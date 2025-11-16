@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Voting Type - Online Voting System</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .selection-container {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .selection-content {
+            max-width: 800px;
+            width: 100%;
+        }
+        
+        .selection-header {
+            text-align: center;
+            margin-bottom: 50px;
+            color: white;
+        }
+        
+        .selection-header h1 {
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
+        
+        .selection-header p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+        
+        .voter-info {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px 20px;
+            border-radius: 10px;
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            font-size: 16px;
+        }
+        
+        .voter-info strong {
+            font-size: 20px;
+        }
+        
+        .voting-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .voting-option {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            position: relative;
+        }
+        
+        .voting-option:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+        }
+        
+        .voting-option .icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+        }
+        
+        .voting-option h2 {
+            color: #667eea;
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+        
+        .voting-option p {
+            color: #666;
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .voting-option .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 10px;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .voting-option .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .logout-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .logout-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        @media (max-width: 768px) {
+            .voting-options {
+                grid-template-columns: 1fr;
+            }
+            .selection-header h1 {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <a href="#" onclick="logout()" class="logout-btn">❌ Logout</a>
+
+    <div class="selection-container">
+        <div class="selection-content">
+            <div class="selection-header">
+                <h1>🗳️ Select Voting Type</h1>
+                <p>Choose between National or State Level Elections</p>
+            </div>
+
+            <div class="voter-info" id="voterInfo">
+                Welcome, Voter ID: <strong id="voterIdDisplay"></strong>
+            </div>
+
+            <div class="voting-options">
+                <div class="voting-option" onclick="selectVotingType('national')">
+                    <div class="icon">🇮🇳</div>
+                    <h2>National Voting</h2>
+                    <p>Vote for national level political parties. Your vote will be counted towards the general elections for national governance.</p>
+                    <a href="#" class="btn">Vote National</a>
+                </div>
+
+                <div class="voting-option" onclick="selectVotingType('state')">
+                    <div class="icon">🇮🇳</div>
+                    <h2>State Voting</h2>
+                    <p>Vote for Bihar state level elections. Your vote will be counted for state assembly elections and regional governance.</p>
+                    <a href="#" class="btn">Vote State</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Check if user is logged in
+        window.addEventListener('load', function() {
+            const isLoggedIn = sessionStorage.getItem('isLoggedIn');
+            const voterId = sessionStorage.getItem('voterId');
+
+            if (isLoggedIn !== 'true' || !voterId) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            // Display voter ID
+            document.getElementById('voterIdDisplay').textContent = voterId;
+        });
+
+        function selectVotingType(type) {
+            // Store voting type in session
+            sessionStorage.setItem('votingType', type);
+
+            // Redirect to voting page
+            window.location.href = 'voting.html';
+        }
+
+        function logout() {
+            sessionStorage.clear();
+            window.location.href = 'login.html';
+        }
+    </script>
+</body>
+
+</html>

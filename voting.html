@@ -1,0 +1,90 @@
+<!DOCTYPE html>13
+
+<button id="logoutBtn" class="logout-btn">Logout</button>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Voting System - Bihar Elections</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>🗳️ Online Voting System</h1>
+            <p>Bihar State Elections 2025</p>
+        </header>
+
+        <div id="votingSection" class="voting-section">
+            <h2>Cast Your Vote</h2>
+
+            <div class="section">
+                <h3>National Level Parties</h3>
+                <div class="parties">
+                    <div class="party-card">
+                        <div class="party-symbol">
+                        </div>
+                        <h4>Bharatiya Janata Party (BJP)</h4>
+                        <input type="radio" name="vote" value="BJP" id="bjp">
+                        <label for="bjp">Vote for BJP</label>
+                    </div>
+
+                    <div class="party-card">
+                        <div class="party-symbol">
+                        </div>
+                        <h4>Indian National Congress (INC)</h4>
+                        <input type="radio" name="vote" value="INC" id="inc">
+                        <label for="inc">Vote for INC</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>Bihar State Parties</h3>
+                <div class="parties">
+                    <div class="party-card">
+                        <div class="party-symbol">
+                        </div>
+                        <h4>Rashtriya Janata Dal (RJD)</h4>
+                        <input type="radio" name="vote" value="RJD" id="rjd">
+                        <label for="rjd">Vote for RJD</label>
+                    </div>
+
+                    <div class="party-card">
+                        <div class="party-symbol">
+                        </div>
+                        <h4>Janata Dal (United) - JD(U)</h4>
+                        <input type="radio" name="vote" value="JDU" id="jdu">
+                        <label for="jdu">Vote for JD(U)</label>
+                    </div>
+
+                </div>
+            </div>
+
+            <button onclick="submitVote()" class="submit-btn">Submit Vote</button>
+        </div>
+
+        <div id="thankYouSection" class="thank-you-section" style="display: none;">
+            <div class="thank-you-card">
+                <div class="checkmark">✓</div>
+                <h2>Thank You for Voting!</h2>
+                <p>Your vote has been successfully recorded.</p>
+                <p class="vote-info">You voted for: <strong id="selectedParty"></strong></p>
+                <p class="message">Your participation strengthens our democracy!</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Check if user is logged in
+        const isLoggedIn = sessionStorage.getItem('isLoggedIn');
+        if (!isLoggedIn) {
+            window.location.href = 'login.html';
+        }
+    </script>
+    <script src="script.js"></script>
+</body>
+
+</html>
